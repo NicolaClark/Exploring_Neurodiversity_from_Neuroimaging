@@ -1,0 +1,4 @@
+*.nii
+*.pkl
+.vscode
+.idea
