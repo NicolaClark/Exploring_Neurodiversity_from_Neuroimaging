@@ -35,8 +35,8 @@ filtered_adhd200_df = adhd200_df[
 
 #print(filtered_adhd200_df.columns.tolist())
 
-output_file1_1 = os.path.join(output_dir, "pure_ASD_phenotypic_NYU.csv")
-output_file1_2 = os.path.join(output_dir,"pure_ADHD_phenotypic_NYU.csv")
+output_file1_1 = os.path.join(output_dir, "ABIDE_pure_ASD_phenotypic_NYU.csv")
+output_file1_2 = os.path.join(output_dir,"ADHD200_pure_ADHD_phenotypic_NYU.csv")
 
 pure_ASD_df = filtered_abide_df[
     (filtered_abide_df['DX_GROUP'] == 1) &
@@ -60,7 +60,7 @@ pure_ADHD_df.to_csv(output_file1_2, index=False)
 
 
 
-output_file2_1 = os.path.join(output_dir,"ASD_ADHD_Comorbid_phenotypic_NYU.csv")
+output_file2_1 = os.path.join(output_dir,"ABIDE_ASD_ADHD_Comorbid_phenotypic_NYU.csv")
 
 ASD_ADHD_df = filtered_abide_df[
     (filtered_abide_df['DX_GROUP'] == 1) &
@@ -70,8 +70,8 @@ ASD_ADHD_df = filtered_abide_df[
 ASD_ADHD_df.to_csv(output_file2_1, index=False)
 
 
-output_file3_1 = os.path.join(output_dir,"TD_ABIDE_phenotypic_NYU.csv")
-output_file3_2 = os.path.join(output_dir,"TD_ADHD_phenotypic_NYU.csv")
+output_file3_1 = os.path.join(output_dir,"ABIDE_TD_phenotypic_NYU.csv")
+output_file3_2 = os.path.join(output_dir,"ADHD200_TD_phenotypic_NYU.csv")
 
 td_abide_df = filtered_abide_df[
     (filtered_abide_df['DX_GROUP'] == 2)
