@@ -1,4 +1,9 @@
-*.nii
+
 *.pkl
 .vscode
 .idea
+NYU_0050970_func_preproc.nii
+NYU_0051015_func_preproc.nii
+sfnwmrda0010001_session_1_rest_1.nii
+Yeo2011_7Networks_MNI152_FreeSurferConformed1mm.nii
+Yeo2011_7Networks_MNI152_FreeSurferConformed1mm_LiberalMask.nii
