@@ -37,14 +37,12 @@ pure_ASD_df = filtered_abide_df[
             (filtered_abide_df['COMORBIDITY'].str.strip() == '') | (filtered_abide_df['COMORBIDITY'].isna())
     )
 ]
-filtered_adhd200_df = filtered_adhd200_df.copy()
-filtered_adhd200_df['DX'] = pd.to_numeric(filtered_adhd200_df['DX'], errors='coerce')
+filtered_adhd200_df2 = filtered_adhd200_df.copy()
+filtered_adhd200_df2['DX'] = pd.to_numeric(filtered_adhd200_df2['DX'], errors='coerce')
 
-pure_ADHD_df = filtered_adhd200_df[
-    (filtered_adhd200_df['DX'] == 1) | (filtered_adhd200_df['DX'] == 2) | (filtered_adhd200_df['DX'] == 3) &
-    (
-            (filtered_adhd200_df['Secondary Dx'].str.strip() == '') | (filtered_adhd200_df['Secondary Dx'].isna())
-    )
+pure_ADHD_df = filtered_adhd200_df2[
+    ((filtered_adhd200_df2['DX'] == 1) | (filtered_adhd200_df2['DX'] == 2) | (filtered_adhd200_df2['DX'] == 3)) &
+    (filtered_adhd200_df2['Secondary Dx'].isna())
 ]
 
 
@@ -70,8 +68,8 @@ td_abide_df = filtered_abide_df[
     (filtered_abide_df['DX_GROUP'] == 2)
 ]
 
-td_adhd_df = filtered_adhd200_df[
-    (filtered_adhd200_df['DX'] == 0)
+td_adhd_df = filtered_adhd200_df2[
+    (filtered_adhd200_df2['DX'] == 0)
 ]
 
 td_abide_df.to_csv(output_file3_1, index=False)
