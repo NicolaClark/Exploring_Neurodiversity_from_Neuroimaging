@@ -1,89 +1,85 @@
 import pandas as pd
+import os
 
 
 
-# Load the CSV file
-input_file = "phenotypic_NYU.csv"  # Replace with your file path
-output_file = "filtered_phenotypic_NYU.csv"  # Desired output file
 
-# Read the CSV into a DataFrame
-df = pd.read_csv(input_file)
+output_dir = "selected_participants"
+os.makedirs(output_dir, exist_ok=True)
 
-#SITE_ID,SUB_ID,DX_GROUP,DSM_IV_TR,AGE_AT_SCAN,SEX,HANDEDNESS_CATEGORY,
-#HANDEDNESS_SCORES,FIQ,VIQ,PIQ,FIQ_TEST_TYPE,VIQ_TEST_TYPE,PIQ_TEST_TYPE,
-#ADI_R_SOCIAL_TOTAL_A,ADI_R_VERBAL_TOTAL_BV,ADI_RRB_TOTAL_C,ADI_R_ONSET_TOTAL_D,
-#ADI_R_RSRCH_RELIABLE,ADOS_MODULE,ADOS_TOTAL,ADOS_COMM,ADOS_SOCIAL,ADOS_STEREO_BEHAV,
-#ADOS_RSRCH_RELIABLE,ADOS_GOTHAM_SOCAFFECT,ADOS_GOTHAM_RRB,ADOS_GOTHAM_TOTAL,
-#ADOS_GOTHAM_SEVERITY,SRS_VERSION,SRS_RAW_TOTAL,SRS_AWARENESS,SRS_COGNITION,
-#SRS_COMMUNICATION,SRS_MOTIVATION,SRS_MANNERISMS,SCQ_TOTAL,AQ_TOTAL,COMORBIDITY,
-#CURRENT_MED_STATUS,MEDICATION_NAME,OFF_STIMULANTS_AT_SCAN,VINELAND_RECEPTIVE_V_SCALED,
-#VINELAND_EXPRESSIVE_V_SCALED,VINELAND_WRITTEN_V_SCALED,VINELAND_COMMUNICATION_STANDARD,
-#VINELAND_PERSONAL_V_SCALED,VINELAND_DOMESTIC_V_SCALED,VINELAND_COMMUNITY_V_SCALED,
-#VINELAND_DAILYLVNG_STANDARD,VINELAND_INTERPERSONAL_V_SCALED,VINELAND_PLAY_V_SCALED,
-#VINELAND_COPING_V_SCALED,VINELAND_SOCIAL_STANDARD,VINELAND_SUM_SCORES,VINELAND_ABC_STANDARD,
-#VINELAND_INFORMANT,WISC_IV_VCI,WISC_IV_PRI,WISC_IV_WMI,WISC_IV_PSI,WISC_IV_SIM_SCALED,
-#WISC_IV_VOCAB_SCALED,WISC_IV_INFO_SCALED,WISC_IV_BLK_DSN_SCALED,WISC_IV_PIC_CON_SCALED,
-#WISC_IV_MATRIX_SCALED,WISC_IV_DIGIT_SPAN_SCALED,WISC_IV_LET_NUM_SCALED,
-#WISC_IV_CODING_SCALED,WISC_IV_SYM_SCALED,EYE_STATUS_AT_SCAN,AGE_AT_MPRAGE,
-#BMISITE_ID,SUB_ID,DX_GROUP,DSM_IV_TR,AGE_AT_SCAN,SEX,HANDEDNESS_CATEGORY,
-#HANDEDNESS_SCORES,FIQ,VIQ,PIQ,FIQ_TEST_TYPE,VIQ_TEST_TYPE,PIQ_TEST_TYPE,
-#ADI_R_SOCIAL_TOTAL_A,ADI_R_VERBAL_TOTAL_BV,ADI_RRB_TOTAL_C,ADI_R_ONSET_TOTAL_D,
-#ADI_R_RSRCH_RELIABLE,ADOS_MODULE,ADOS_TOTAL,ADOS_COMM,ADOS_SOCIAL,ADOS_STEREO_BEHAV,
-#ADOS_RSRCH_RELIABLE,ADOS_GOTHAM_SOCAFFECT,ADOS_GOTHAM_RRB,ADOS_GOTHAM_TOTAL,
-#ADOS_GOTHAM_SEVERITY,SRS_VERSION,SRS_RAW_TOTAL,SRS_AWARENESS,SRS_COGNITION,SRS_COMMUNICATION,
-#SRS_MOTIVATION,SRS_MANNERISMS,SCQ_TOTAL,AQ_TOTAL,COMORBIDITY,CURRENT_MED_STATUS,
-#MEDICATION_NAME,OFF_STIMULANTS_AT_SCAN,VINELAND_RECEPTIVE_V_SCALED,
-#VINELAND_EXPRESSIVE_V_SCALED,VINELAND_WRITTEN_V_SCALED,VINELAND_COMMUNICATION_STANDARD,
-#VINELAND_PERSONAL_V_SCALED,VINELAND_DOMESTIC_V_SCALED,VINELAND_COMMUNITY_V_SCALED,
-#VINELAND_DAILYLVNG_STANDARD,VINELAND_INTERPERSONAL_V_SCALED,VINELAND_PLAY_V_SCALED,
-#VINELAND_COPING_V_SCALED,VINELAND_SOCIAL_STANDARD,VINELAND_SUM_SCORES,
-#VINELAND_ABC_STANDARD,VINELAND_INFORMANT,WISC_IV_VCI,WISC_IV_PRI,WISC_IV_WMI,
-#WISC_IV_PSI,WISC_IV_SIM_SCALED,WISC_IV_VOCAB_SCALED,WISC_IV_INFO_SCALED,
-#WISC_IV_BLK_DSN_SCALED,WISC_IV_PIC_CON_SCALED,WISC_IV_MATRIX_SCALED,WISC_IV_DIGIT_SPAN_SCALED,
-#WISC_IV_LET_NUM_SCALED,WISC_IV_CODING_SCALED,WISC_IV_SYM_SCALED,EYE_STATUS_AT_SCAN,AGE_AT_MPRAGE,BMI
+abide_input_file = "ABIDE_phenotypic_NYU.csv"
+adhd200_input_file = "adhd200_phenotypics.tsv"
 
+
+
+
+abide_df = pd.read_csv(abide_input_file)
+adhd200_df = pd.read_csv(adhd200_input_file, sep='\t')
 
 # Define your conditions
 # Example: Selecting rows where AGE_AT_SCAN is greater than 18 and SEX is 'Male'
-filtered_df = df[
-    (5 < df['AGE_AT_SCAN']) & (df['AGE_AT_SCAN'] < 13) &
-    (80 < df['FIQ']) & (df['FIQ'] < 140) &
-    (80 < df['VIQ']) & (df['VIQ'] < 140) &
-    (80 < df['PIQ']) & (df['PIQ'] < 140) # Example condition
+filtered_abide_df = abide_df[
+    (5 < abide_df['AGE_AT_SCAN']) & (abide_df['AGE_AT_SCAN'] < 13) &
+    (80 < abide_df['FIQ']) & (abide_df['FIQ'] < 140) &
+    (80 < abide_df['VIQ']) & (abide_df['VIQ'] < 140) &
+    (80 < abide_df['PIQ']) & (abide_df['PIQ'] < 140) # Example condition
 ]
 
-# Save the filtered rows to a new CSV
-filtered_df.to_csv(output_file, index=False)
+filtered_adhd200_df = adhd200_df[
+    (5 < adhd200_df['Age']) & (adhd200_df['Age'] < 13) &
+    (80 < adhd200_df['Full4 IQ']) & (adhd200_df['Full4 IQ'] < 140) &
+    (80 < adhd200_df['Verbal IQ']) & (adhd200_df['Verbal IQ'] < 140) &
+    (80 < adhd200_df['Performance IQ']) & (adhd200_df['Performance IQ'] < 140) # Example condition
+]
 
-print(f"Filtered data saved to {output_file}")
 
+#print(filtered_adhd200_df.columns.tolist())
 
-input_file = "filtered_phenotypic_NYU.csv"  # Replace with your file path
-output_file = "pure_ASD_phenotypic_NYU.csv"
-df = pd.read_csv(input_file)
-filtered_df = df[
-    (df['DX_GROUP'] == 1) &
+output_file1_1 = os.path.join(output_dir, "pure_ASD_phenotypic_NYU.csv")
+output_file1_2 = os.path.join(output_dir,"pure_ADHD_phenotypic_NYU.csv")
+
+pure_ASD_df = filtered_abide_df[
+    (filtered_abide_df['DX_GROUP'] == 1) &
     (
-            (df['COMORBIDITY'].str.strip() == '') | (df['COMORBIDITY'].isna())
+            (filtered_abide_df['COMORBIDITY'].str.strip() == '') | (filtered_abide_df['COMORBIDITY'].isna())
     )
 ]
-filtered_df.to_csv(output_file, index=False)
+filtered_adhd200_df = filtered_adhd200_df.copy()
+filtered_adhd200_df['DX'] = pd.to_numeric(filtered_adhd200_df['DX'], errors='coerce')
 
-
-input_file = "filtered_phenotypic_NYU.csv"  # Replace with your file path
-output_file = "ASD_ADHD_Comorbid_phenotypic_NYU.csv"
-df = pd.read_csv(input_file)
-filtered_df = df[
-    (df['DX_GROUP'] == 1) &
-    (df['COMORBIDITY'].str.contains('ADHD', na=False, case=False))
+pure_ADHD_df = filtered_adhd200_df[
+    (filtered_adhd200_df['DX'] == 1) | (filtered_adhd200_df['DX'] == 2) | (filtered_adhd200_df['DX'] == 3) &
+    (
+            (filtered_adhd200_df['Secondary Dx'].str.strip() == '') | (filtered_adhd200_df['Secondary Dx'].isna())
+    )
 ]
-filtered_df.to_csv(output_file, index=False)
 
 
-input_file = "filtered_phenotypic_NYU.csv"  # Replace with your file path
-output_file = "TD_phenotypic_NYU.csv"
-df = pd.read_csv(input_file)
-filtered_df = df[
-    (df['DX_GROUP'] == 2)
+pure_ASD_df.to_csv(output_file1_1, index=False)
+pure_ADHD_df.to_csv(output_file1_2, index=False)
+
+
+
+output_file2_1 = os.path.join(output_dir,"ASD_ADHD_Comorbid_phenotypic_NYU.csv")
+
+ASD_ADHD_df = filtered_abide_df[
+    (filtered_abide_df['DX_GROUP'] == 1) &
+    (filtered_abide_df['COMORBIDITY'].str.contains('ADHD', na=False, case=False))
 ]
-filtered_df.to_csv(output_file, index=False)
+
+ASD_ADHD_df.to_csv(output_file2_1, index=False)
+
+
+output_file3_1 = os.path.join(output_dir,"TD_ABIDE_phenotypic_NYU.csv")
+output_file3_2 = os.path.join(output_dir,"TD_ADHD_phenotypic_NYU.csv")
+
+td_abide_df = filtered_abide_df[
+    (filtered_abide_df['DX_GROUP'] == 2)
+]
+
+td_adhd_df = filtered_adhd200_df[
+    (filtered_adhd200_df['DX'] == 0)
+]
+
+td_abide_df.to_csv(output_file3_1, index=False)
+td_adhd_df.to_csv(output_file3_2, index=False)
