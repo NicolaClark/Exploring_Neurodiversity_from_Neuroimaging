@@ -6,10 +6,10 @@ output_dir = "data/selected_participants"
 os.makedirs(output_dir, exist_ok=True)
 
 abide_input_file = "data/phenotypic/ABIDE_phenotypic_NYU.csv"
-adhd200_input_file = "data/phenotypic/adhd200_phenotypics.tsv"
+adhd200_input_file = "data/phenotypic/NYU_phenotypic.csv"
 
 abide_df = pd.read_csv(abide_input_file)
-adhd200_df = pd.read_csv(adhd200_input_file, sep='\t')
+adhd200_df = pd.read_csv(adhd200_input_file)
 
 # Define conditions
 # Selecting rows where age is between 5 and 13 and various IQs are 80-140
@@ -42,7 +42,7 @@ filtered_adhd200_df2['DX'] = pd.to_numeric(filtered_adhd200_df2['DX'], errors='c
 
 pure_ADHD_df = filtered_adhd200_df2[
     ((filtered_adhd200_df2['DX'] == 1) | (filtered_adhd200_df2['DX'] == 2) | (filtered_adhd200_df2['DX'] == 3)) &
-    (filtered_adhd200_df2['Secondary Dx'].isna())
+    (filtered_adhd200_df2['Secondary Dx '].isna())
 ]
 
 
@@ -69,7 +69,8 @@ td_abide_df = filtered_abide_df[
 ]
 
 td_adhd_df = filtered_adhd200_df2[
-    (filtered_adhd200_df2['DX'] == 0)
+    (filtered_adhd200_df2['DX'] == 0) &
+    (filtered_adhd200_df2['Secondary Dx '].isna())
 ]
 
 td_abide_df.to_csv(output_file3_1, index=False)
